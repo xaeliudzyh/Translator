@@ -51,8 +51,8 @@ namespace Translator
                 {
                     line.Replace("cin>>", "Console.ReadLine(");
                     while (Regex.Matches(line, ">>").Count > 0)
-                        line.Replace(">>", ",");
-                    line.Replace(";", ");");
+                        line = line.Replace(">>", ",");
+                    line = line.Replace(";", ");");
                   
                 }
 
@@ -61,17 +61,17 @@ namespace Translator
                 {
                     line.Replace("cout<<", "Console.WriteLine(");
                     while (Regex.Matches(line, "<<").Count > 0)
-                        line.Replace("<<", ",");
-                    line.Replace(";", ");");
+                        line = line.Replace("<<", ",");
+                    line = line.Replace(";", ");");
 
                 }
-                line = line.Replace("long", "xxx");
+                
                 // пробегаемся по типам данных, и меняем на соответствующие в нужном ЯП
                 foreach(string key in data.Keys)
                 {
                     if (line.Contains(key))
                     {
-                        line.Replace(key, data[key]);
+                        line = line.Replace(key, data[key]);
 
                     }
                 }
