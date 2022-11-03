@@ -1,0 +1,13 @@
+﻿#include<cmath>
+#include<iostream>
+
+using namespace std;
+
+int main(){
+    long a,b,c;
+    cin>>a>>b>>c;
+    if(a>c)
+        cout<<a+b+c;
+    else
+        cout<<a*b*c;
+}
