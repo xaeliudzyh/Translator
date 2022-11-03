@@ -52,13 +52,16 @@ namespace Translator
             {
                 string line = initialString[i];
               
-                // убираем инклуды и пространства имен
-                if (line.Contains("#include") || line.Contains("namespace") || line.Contains("int main()"))
+                // убираем инклуды, пространства имен и пустые строки, удаляем строки с ними
+                if (line.Contains("#include") || line.Contains("namespace") || line.Contains("int main()") || line=="")
                 {
-                    initialString[i] = "";
+                    /*initialString[i] = "";*/
+                    initialString = initialString.Where(k
+                        => k != initialString[i]).ToArray();
+                    i--;
                     continue;
                 }
-
+                
                 // "переводим" считывание с клавиатуры
                 if(line.Contains("cin>>"))
                 {
@@ -75,7 +78,6 @@ namespace Translator
                     while (Regex.Matches(line, "<<").Count > 0)
                         line = line.Replace("<<", ",");
                     line = line.Replace(";", ");");
-
                 }
                 
                 // пробегаемся по типам данных, и меняем на соответствующие в нужном ЯП
@@ -96,19 +98,22 @@ namespace Translator
         static void Main(string[] fileNames)
         {
             string initialFile = fileNames[0];
-            //string destinationFile = fileNames[1];
+            string destinationFile = fileNames[1];
             string[] changedCode= VarChanger(initialFile);
             string finalCode = "";
 
-            finalCode+="namespace Namespace{\n class Program{ \n   static void Main(string[] args){\n";
+            finalCode+="namespace Namespace{\n class Program{ " +
+                       "\n   static void Main(string[] args){\n";
             for (int i = 0; i < changedCode.Length; i++)
             {
                 finalCode+="        ";
                 finalCode+=changedCode[i];
                 finalCode += "\n";
             }
-            finalCode+="} \n }";
+            finalCode+=" }\n}";
+            string[] codeArray = new[] { finalCode };
             Console.WriteLine(finalCode);
+            WriteFile(destinationFile,codeArray);
             
         }
     }
