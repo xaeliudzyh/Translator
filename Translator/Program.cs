@@ -24,7 +24,7 @@ namespace Translator
         }
 
 
-
+        // словарь типов данных
         public static Dictionary<string, string> data = new Dictionary<string, string>()
         {
             {"unsigned long long", "ulong"},
@@ -89,6 +89,7 @@ namespace Translator
                 }
                 initialString[i] = line;
             }
+            //возврат переработанной строки
             return initialString;
         }
 
