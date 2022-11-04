@@ -55,14 +55,13 @@ namespace Translator
                 // убираем инклуды, пространства имен и пустые строки, удаляем строки с ними
                 if (line.Contains("#include") || line.Contains("namespace") || line.Contains("int main()") || line=="")
                 {
-                    /*initialString[i] = "";*/
                     initialString = initialString.Where(k
                         => k != initialString[i]).ToArray();
                     i--;
                     continue;
                 }
                 
-                // "переводим" считывание с клавиатуры
+                // "переводим" считывание с клавиатуры (beta-version)
                 if(line.Contains("cin>>"))
                 {
                     line = line.Replace("cin>>", "Console.ReadLine(");
@@ -74,9 +73,9 @@ namespace Translator
                 // "переводим" вывод с консоли
                 if (line.Contains("cout<<"))
                 {
-                    line = line.Replace("cout<<", "Console.WriteLine(");
+                    line = line.Replace("cout<<", "Console.Write(");
                     while (Regex.Matches(line, "<<").Count > 0)
-                        line = line.Replace("<<", ",");
+                        line = line.Replace("<<", ";\nConsole.Write(");
                     line = line.Replace(";", ");");
                 }
                 

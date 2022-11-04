@@ -1,8 +1,8 @@
-﻿int main(){
-int k=5,z=8;
-for(int i=0;i<z;i++)
-{
-k++;
-}
-cout<<k;
+﻿#include<string>
+#include<iostream>
+
+using namespace std;
+int main(){
+    string a="1323rsdf",b="1afsgafs0",c="asfgasgf5";
+    cout<<a<<" "<<b<<" "<<c;
 }
