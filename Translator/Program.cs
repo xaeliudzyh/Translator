@@ -106,6 +106,7 @@ namespace Translator
                        "\n   static void Main(string[] args){\n";
             for (int i = 0; i < changedCode.Length; i++)
             {
+                
                 finalCode+="        ";
                 finalCode+=changedCode[i];
                 finalCode += "\n";
